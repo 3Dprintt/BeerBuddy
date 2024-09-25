@@ -1,0 +1,42 @@
+﻿@model List<BeerBuddy.Controllers.Place>
+
+@{
+    ViewBag.Title = "Liste des Bars et Pubs";
+}
+
+<h2>Liste des Bars et Pubs</h2>
+
+<form method="get" action="@Url.Action("Index")">
+    <div class="form-group">
+        <label for="searchTerm">Rechercher un bar ou un pub :</label>
+        <input type="text" name="searchTerm" id="searchTerm" class="form-control" value="@ViewBag.SearchTerm" />
+    </div>
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var place in Model)
+            {
+                <tr>
+                    <td>@place.Name</td>
+                    <td>@place.Vicinity</td>
+                    <td>@place.Rating</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucun bar ou pub trouvé.</p>
+}
